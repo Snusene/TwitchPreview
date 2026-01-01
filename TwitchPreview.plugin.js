@@ -2,7 +2,7 @@
  * @name TwitchPreview
  * @author Snues
  * @description Adds inline video previews to Twitch links, similar to YouTube embeds
- * @version 1.0.0
+ * @version 1.0.1
  * @source https://github.com/Snusene/TwitchPreview
  */
 

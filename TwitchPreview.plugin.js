@@ -9,7 +9,6 @@
 module.exports = class TwitchPreview {
     constructor() {
         this.observer = null;
-        this.styleEl = null;
     }
 
     start() {
@@ -21,16 +20,14 @@ module.exports = class TwitchPreview {
 
     stop() {
         if (this.observer) this.observer.disconnect();
-        if (this.styleEl) this.styleEl.remove();
+        BdApi.DOM.removeStyle("TwitchPreview");
         document.querySelectorAll(".twitch-video-preview").forEach(el => el.remove());
         document.querySelectorAll("[data-twitch-modified]").forEach(el => delete el.dataset.twitchModified);
         document.querySelectorAll("[data-twitch-processed]").forEach(el => delete el.dataset.twitchProcessed);
     }
 
     injectStyles() {
-        this.styleEl = document.createElement("style");
-        this.styleEl.id = "twitch-preview-styles";
-        this.styleEl.textContent = `
+        BdApi.DOM.addStyle("TwitchPreview", `
             .twitch-video-preview {
                 position: relative;
                 width: 400px;
@@ -81,8 +78,7 @@ module.exports = class TwitchPreview {
                 height: 100%;
                 border: none;
             }
-        `;
-        document.head.appendChild(this.styleEl);
+        `);
     }
 
     processEmbeds() {
